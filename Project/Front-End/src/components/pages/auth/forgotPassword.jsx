@@ -4,7 +4,7 @@ import { PrimaryButton } from "../../controls/buttons";
 import { Input } from "../../controls/field";
 import { Link, Loader } from "../../utils/utils";
 import { toast } from "../../helpers/toast";
-import AuthLayout from "../../layouts/AuthLayout";
+import AuthLayout from "../../layouts/authLayout";
 
 const ForgotPassword = () => {
     const [validationMessage, setValidationMessage] = useState([]);

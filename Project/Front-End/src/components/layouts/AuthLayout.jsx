@@ -34,10 +34,10 @@ const AuthLayout = ({ title = "", children }) => {
                             </div>
                         </Link>
 
-                        <div className="space-y-4 text-2xl font-Julee_cursive">
+                        <div className="space-y-4 text-1xl font-Julee_cursive">
                             <h1 className="text-2xl lg:text-4xl">{title}</h1>
 
-                            <p className="font-medium">
+                            <p className="font-medium text-2xs">
                                 The platform that connects businesses with talented freelancers
                                 within the kingdom. Our user-friendly and secure platform offers a range of freelance services 
                                 to help businesses find the right professionals for their projects. Join GigSource today 

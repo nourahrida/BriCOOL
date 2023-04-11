@@ -6,7 +6,7 @@ import { PrimaryButton, SecondaryButton } from "../../controls/buttons";
 import { Checkbox, Input } from "../../controls/field";
 import { Link, Loader } from "../../utils/utils";
 import { toast } from "../../helpers/toast";
-import AuthLayout from "../../layouts/AuthLayout";
+import AuthLayout from "../../layouts/authLayout";
 
 const Register = () => {
     const navigate = useNavigate();

@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { Checkbox as CH2 } from "@material-tailwind/react";
 import { PrimaryButton, SecondaryButton } from "../../controls/buttons";
 import { Checkbox, Input } from "../../controls/field";
-import { Link, Loader } from "../../utils/utils";
+import { Link, Loader ,PageAnimation} from "../../utils/utils";
 import  useLocalStorage  from "../../helpers/useLocalStorage";
 import { toast } from "../../helpers/toast";
-import AuthLayout from "../../layouts/AuthLayout";
+import AuthLayout from "../../layouts/authLayout";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -70,7 +70,7 @@ const Login = () => {
     };
 
     return (
-        
+        <PageAnimation >
 
 
         <AuthLayout
@@ -158,7 +158,7 @@ const Login = () => {
             </form>
           
 
-        </AuthLayout>
+        </AuthLayout></PageAnimation>
     );
 };
 
