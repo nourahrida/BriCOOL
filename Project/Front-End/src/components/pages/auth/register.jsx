@@ -163,8 +163,8 @@ const Register = () => {
                     <hr className="w-12" />
                 </div>
 
-                <div className="flex items-center space-x-4 lg:space-x-2 xl:space-x-4 text-sm font-semibold">
-                    <SecondaryButton as="a" href="#auth-google">
+                <div className="lg:flex xl:flex 2xl:flex md:flex items-center 2xl:space-x-4 md:space-x-2 lg:space-x-2 xl:space-x-4 text-sm font-semibold sm:inline">
+                    <SecondaryButton as="a" href="#auth-google" cStyle="!mb-2">
                         <FcGoogle className="h-5 w-5 lg:w-4 lg:h-4 xl:h-5 xl:w-5" />
 
                         <span className="text-[0.7rem] md:text-sm lg:text-[0.7rem] xl:text-sm">
@@ -172,7 +172,7 @@ const Register = () => {
                         </span>
                     </SecondaryButton>
 
-                    <SecondaryButton as="a" href="#auth-facebook">
+                    <SecondaryButton as="a" href="#auth-facebook" cStyle="!mb-2">
                         <RiFacebookCircleFill className="h-5 w-5 lg:w-4 lg:h-4 xl:h-5 xl:w-5 text-blue-600" />
 
                         <span className="text-[0.7rem] md:text-sm lg:text-[0.7rem] xl:text-sm">

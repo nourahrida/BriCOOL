@@ -3,7 +3,7 @@
 export default function Footer() {
     return (
 
-            <footer className="bg-white dark:bg-gray-900">
+            <footer className="bg-white border-gray-200 dark:bg-gray-900">
                 <hr className="h-px my-5 bg-gray-200 border-1 dark:bg-gray-700" />
                 <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
                     <div className="md:flex md:justify-between">
@@ -51,7 +51,7 @@ export default function Footer() {
                     </div>
                     <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
                     <div className="sm:flex sm:items-center sm:justify-between">
-                        <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com/" className="hover:underline">Flowbite™</a>. All Rights Reserved.
+                        <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com/" className="hover:underline">GigSource™</a>. All Rights Reserved.
                         </span>
                         <div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
                             <a href="#" className="text-gray-500 hover:text-gray-900 dark:hover:text-white">

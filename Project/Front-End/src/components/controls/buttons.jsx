@@ -38,7 +38,7 @@ export const PrimaryButton = ({
     );
 };
 
-export const SecondaryButton = ({ type = "button", children, as = "button", href = "#" }) => {
+export const SecondaryButton = ({ type = "button", children, as = "button", href = "#" ,cStyle = ""}) => {
     const Tag = as;
 
     const otherAttributes = useMemo(() => {
@@ -57,7 +57,7 @@ export const SecondaryButton = ({ type = "button", children, as = "button", href
     return (
         <Tag
             {...otherAttributes}
-            className="transition-all duration-300 border py-3 rounded-md border-gray-300 w-full flex justify-center items-center space-x-2 hover:bg-gray-300"
+            className={ `transition-all duration-300 border py-3 rounded-md border-gray-300 w-full flex justify-center items-center space-x-2 hover:bg-gray-300 ${cStyle}` }
         >
             {children}
         </Tag>
