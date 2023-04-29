@@ -29,7 +29,7 @@ export const PrimaryButton = ({
         <Tag
             {...otherAttributes}
             {...other}
-            className={`flex items-center justify-center space-x-3 transition-all duration-300 px-2 w-full font-medium py-3 ${
+            className={`dark:border-white flex items-center justify-center space-x-3 transition-all duration-300 px-2 w-full font-medium py-3 ${
                 disabled ? "cursor-not-allowed bg-indigo-800" : "bg-indigo-600"
             } text-white text-sm rounded-md focus:outline-none hover:bg-indigo-700 focus:ring focus:border-indigo-500 focus:ring-indigo-500/50`}
         >
@@ -57,7 +57,7 @@ export const SecondaryButton = ({ type = "button", children, as = "button", href
     return (
         <Tag
             {...otherAttributes}
-            className={ `transition-all duration-300 border py-3 rounded-md border-gray-300 w-full flex justify-center items-center space-x-2 hover:bg-gray-300 ${cStyle}` }
+            className={ `dark:border-white transition-all duration-300 border py-3 rounded-md border-gray-300 w-full flex justify-center items-center space-x-2 hover:bg-gray-300 ${cStyle}` }
         >
             {children}
         </Tag>

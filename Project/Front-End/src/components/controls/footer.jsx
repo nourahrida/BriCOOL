@@ -10,7 +10,7 @@ export default function Footer() {
                         <div className="mb-6 md:mb-0">
                             <a href="/" className="flex items-center">
                                 <img src="images/logo.png" className="h-8 mr-3" alt="GigSource Logo" />
-                                <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">GigSource</span>
+                                <span className="self-center text-2xl font-semibold whitespace-nowrap text-gray-800 dark:text-white">GigSource</span>
                             </a>
                         </div>
                         <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">

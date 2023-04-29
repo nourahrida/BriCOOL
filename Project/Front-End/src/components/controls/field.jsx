@@ -18,11 +18,14 @@ export const Input = ({
 
   return (
     <>
-      <label htmlFor={id} className="text-sm text-gray-700 font-semibold">
+      <label
+        htmlFor={id}
+        className="dark:text-white text-sm text-gray-700 font-semibold"
+      >
         {label} {required && <span className="text-red-500">*</span>}
       </label>
 
-      <div className="relative">
+      <div className="dark:text-gray-700 text-gray-700 relative">
         <input
           id={id}
           type={type === "password" ? (show ? "text" : "password") : type}
@@ -71,7 +74,8 @@ export const Checkbox = ({
   id = "",
   label = "",
   terms_and_conditions = false,
-  onChangeFunction = null
+  setAgreetermsAndConditions,
+  agreetermsAndConditions,
 }) => {
   return (
     <>
@@ -83,9 +87,9 @@ export const Checkbox = ({
           aria-labelledby="exampleModalScrollableLabel"
           aria-hidden="true"
         >
-          <div className="modal-dialog modal-dialog-scrollable relative w-auto pointer-events-none">
-            <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
-              <div className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
+          <div className=" modal-dialog modal-dialog-scrollable relative w-auto pointer-events-none">
+            <div className=" modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+              <div className="bg-slate-100  modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
                 <h5
                   className="text-xl font-medium leading-normal text-gray-800"
                   id="exampleModalScrollableLabel"
@@ -99,7 +103,7 @@ export const Checkbox = ({
                   aria-label="Close"
                 ></button>
               </div>
-              <div className="modal-body relative p-4">
+              <div className="bg-slate-100 dark:text-gray-800 modal-body relative p-4">
                 <p>
                   This is some placeholder content to show the scrolling
                   behavior for modals. We use repeated line br/eaks to
@@ -108,19 +112,16 @@ export const Checkbox = ({
                   than the predefined max-height of modal, content will be
                   cropped and scrollable within the modal.
                 </p>
-                <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
                 <p>
                   This content should appear at the bottom after you scroll.
                 </p>
               </div>
-              <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
+              <div className="bg-slate-100  modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
                 <button
                   type="button"
                   className="inline-block px-6 py-2.5 bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out"
                   data-bs-dismiss="modal"
-                  onClick={() => {
-                    document.getElementById(id).checked = false
-                  }}
+                  onClick={() => setAgreetermsAndConditions(false)}
                 >
                   Decline
                 </button>
@@ -128,11 +129,9 @@ export const Checkbox = ({
                   type="button"
                   className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-1"
                   data-bs-dismiss="modal"
-                  onClick={() => {
-                    document.getElementById(id).checked = true
-                  }}
+                  onClick={() => setAgreetermsAndConditions(true)}
                 >
-                 I accept
+                  I accept
                 </button>
               </div>
             </div>
@@ -140,18 +139,30 @@ export const Checkbox = ({
         </div>
       )}
 
-      <label htmlFor={id} className="space-x-2 inline-block mr-2">
-        <input
-          id={id}
-          onChange={onChangeFunction}
-          className="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50"
-          type="checkbox"
-        />
+      <label
+        htmlFor={id}
+        className=" text-gray-700 space-x-2 inline-block mr-2"
+      >
+        {terms_and_conditions ? (
+          <input
+            id={id}
+            readOnly 
+            checked={agreetermsAndConditions}
+            className="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50"
+            type="checkbox"
+          />
+        ) : (
+          <input
+            id={id}
+            className="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50"
+            type="checkbox"
+          />
+        )}
 
         {!terms_and_conditions ? (
           <span className="text-sm cursor-pointer">{label}</span>
         ) : (
-          <span className="text-sm cursor-pointer">
+          <span className="dark:text-white text-gray-700 text-sm cursor-pointer">
             I agree with the{" "}
             <a
               href="#"

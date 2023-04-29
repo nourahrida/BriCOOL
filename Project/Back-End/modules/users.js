@@ -1,6 +1,6 @@
-import mongosse from "mongosse";
+import mongoose from "mongoose";
 
-const freelancerSchema = new mongosse.Schema({
+const freelancerSchema = new mongoose.Schema({
     skils: { type: [String], require: false, default: [] },
     tags: { type: [String], require: false, default: [] },
     balance: { type: Number, require: true, default: 0 },
@@ -13,7 +13,7 @@ const freelancerSchema = new mongosse.Schema({
     //countWorksInProgress : { type: Number, require: true, default:0 },
     worksInProgress: { type: [String], require: false, default: [] },
     description: { type: String },
-    comment: { type: [String], default: [] },
+    feedbackClients: { type: [String], default: [] },
     // verifiedInfo : { type: Number, require: true, default : 0 }, // ( cin phone number email is verified )
     levelOfFreelancer: { type: Number, require: true, default: 0 }, // ( +100 complatedWorks = 1 , +300 complatedWorks = 2 , +500 complatedWorks = 3 , +1000 complatedWorks = 4)
     stars: { type: [String], require: false, default: [] }, //collection stars contains _id, idOfClient, idOfFreelancer ( this ), numberOfStars.
@@ -26,7 +26,7 @@ const freelancerSchema = new mongosse.Schema({
 
 });
 
-const clientSchema = new mongosse.Schema({
+const clientSchema = new mongoose.Schema({
     balance: { type: Number, require: true, default: 0 },
     blockedBalance: { type: Number, require: true, default: 0 },
     posts: { type: [String], require: false, default: [] },// create a post to search for freelancer
@@ -36,28 +36,29 @@ const clientSchema = new mongosse.Schema({
     worksInProgress: { type: [String], require: false, default: [] },
 });
 
-const userSchema = mongosse.Schema({
+const userSchema = mongoose.Schema({
     firstName: { type: String, require: false },
     lastName: { type: String, require: false },
-    email: { type: String, require: true },
+    email: { type: String, require: true ,unique: true},
     password: { type: String, require: false },
     fromGoogle: { type: Boolean, require: false },
     googleId: { type: String, require: false },
     image: { type: String, require: false },
-    phoneNumber: { type: Number, require: true },
-    cin: { type: String, require: false },
-    adresse: { type: String, require: false },
-    verifiedEmail: { type: Boolean, require: false },
+    phoneNumber: { type: Number, require: true ,unique: true},
+    cin: { type: String, require: false},
+    job: { type: String, require: false },
+    adresse: { type: String, require: false }, 
+    verifiedEmail: { type: Boolean, require: true, default: false },
     verifiedPhoneNumber: { type: Boolean, require: false },
     verifiedCin: { type: Boolean, require: false },
     typeOfUser: { type: Number, require: true, default: 1 }, // 1 = client, 2 = freelancer
-    accountCreationDate: { type: date, require: true, default: date.now() },
-    lastConnectionDate: { type: date, require: true, default: date.now() },
+    accountCreationDate: { type: Date, require: true, default: Date.now() },
+    lastConnectionDate: { type: Date, require: true, default: Date.now() },
     client: { type: clientSchema, require: true },
     freelancer: { type: freelancerSchema, require: true },
 
 });
 
-const User = mongosse.model("User", userSchema);
+const User = mongoose.model("Users", userSchema);
 
 export default User;

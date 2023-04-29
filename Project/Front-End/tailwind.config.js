@@ -31,12 +31,21 @@
 //     plugins: [require("@tailwindcss/forms"), require("tailwind-scrollbar")]
 // });
 
-
+ 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     darkMode: 'class',
-    content: ['node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}', "./node_modules/flowbite/**/*.js", "./src/**/*.{js,jsx,ts,tsx}", "./public/index.html", './src/**/*.{html,js}', './node_modules/tw-elements/dist/js/**/*.js'],
+    content: [
+        "./node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}",
+        "./node_modules/flowbite/**/*.js",
+        "./src/**/*.{js,jsx,ts,tsx}", 
+        "./public/index.html", 
+        "./node_modules/tw-elements/dist/js/**/*.js"
+        ],
     theme: {
+        colors : {
+            "mostafa": "#64748b",
+        },
         fontFamily: {
             Satisfy: ["Satisfy"],
             Julee_cursive: ["Julee", "cursive"],
@@ -61,5 +70,10 @@ module.exports = {
             }
         }
     },
-    plugins: [require('flowbite/plugin'), require('tw-elements/dist/plugin'), require("@tailwindcss/forms"), require("tailwind-scrollbar")]
+    plugins: [
+        require('flowbite/plugin'),
+        require('tw-elements/dist/plugin'),
+        require("@tailwindcss/forms"), 
+        require("tailwind-scrollbar")
+        ]
 };

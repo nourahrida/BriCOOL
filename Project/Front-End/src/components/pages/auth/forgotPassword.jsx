@@ -46,10 +46,10 @@ const ForgotPassword = () => {
                 </>
             }
         >
-            <h3 className="text-center text-xl font-semibold text-gray-700">
+            <h3 className="dark:text-white text-center text-xl font-semibold text-gray-700">
                 Reset password
             </h3>
-            <p className="text-center text-sm mt-2 mb-10">
+            <p className="text-gray-700 dark:text-white text-center text-sm mt-2 mb-10">
                 If you forgot your password, don't worry! we’ll email you <br />{" "}
                 instructions to reset your password.
             </p>
