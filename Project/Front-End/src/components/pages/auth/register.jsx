@@ -10,12 +10,20 @@ import AuthLayout from "../../layouts/authLayout";
 import { useDispatch, useSelector } from "react-redux";
 import { signUp } from "../../../actions/auth";
 import { decrypt } from "../../../encryptDecrypt";
+import decode from "jwt-decode";
 
 function Register() {
   const dispatch = useDispatch();
-  //const auth = useSelector((state) => state.auth);
+  var userData = localStorage.getItem("profile");
+  userData = userData && decode(userData);
   //const test = localStorage.getItem("profile");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userData?.verifiedEmail){
+      navigate("/");
+    }
+}, [userData]);
 
   //   useEffect(() => {
   //     if (auth.message) toast("error", auth.message);

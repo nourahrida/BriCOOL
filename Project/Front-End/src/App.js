@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes  } from "react-router-dom";
 import Auth from "./components/pages/auth/auth";
 import VerifyMail from "./components/pages/auth/VerifyMail";
 import  Page404  from "./components/pages/error/Page404";

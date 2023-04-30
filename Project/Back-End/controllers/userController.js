@@ -2,8 +2,8 @@ import User from "../modules/users.js";
 // import bcrypt from "bcryptjs";
 import { encrypt, IsMatch } from "../classes/encryptDecrypt.js";
 import jwt from "jsonwebtoken";
-import { sendMail } from "../classes/mailClass.js";
-import mailOption from "../classes/verifyMail.js";
+import { sendMail } from "../classes/mail.js";
+import mailOption from "../classes/mailOption.js";
 import mongoose from "mongoose";
 
 export const signUp = async (req, res) => {
@@ -131,3 +131,13 @@ export const verifyMailResend = async (req, res) => {
         console.log(error);
     }
 };
+
+export const ForgotPassword = async (req,res) => {
+    try {
+       const { email } = req.body;
+
+    } catch (err) {
+        res.status(202).json({ message: "Error server, please try again." });
+        console.log(error);
+    }
+}

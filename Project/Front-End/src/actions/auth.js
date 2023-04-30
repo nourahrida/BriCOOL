@@ -20,6 +20,7 @@ export const signUp = (formData, navigate, setLoading) => async (dispatch) => {
         }
 
     } catch (err) {
+        setLoading(false);
         console.log(err);
     }
 }
@@ -48,6 +49,7 @@ export const login = (formData, navigate, setLoading, setInvalid) => async (disp
         }
 
     } catch (err) {
+        setLoading(false);
         console.log(err);
     }
 };
@@ -60,15 +62,25 @@ export const verifyMailResend = ({ id, email }, setLoadingPage) => async (dispat
 
         setLoadingPage(false);
     } catch (err) {
+        setLoadingPage(false);
         console.log(err);
     }
 }
 
-export const verifyMail = (id, setMessage) => async (dispatch) => {
+export const verifyMail = (id, setMessage) => async () => {
     try {
         const { data } = await API.verifyMail({ id: id });
 
         setMessage(data.message);
+
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export const ForgotPassword = () => async (dispatch) => {
+    try {
+       
 
     } catch (err) {
         console.log(err);

@@ -94,7 +94,7 @@ export const Checkbox = ({
                   className="text-xl font-medium leading-normal text-gray-800"
                   id="exampleModalScrollableLabel"
                 >
-                  Modal title
+                  Terms and Conditions
                 </h5>
                 <button
                   type="button"

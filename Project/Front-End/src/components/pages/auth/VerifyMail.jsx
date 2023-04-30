@@ -4,6 +4,8 @@ import { verifyMail } from "../../../actions/auth";
 import { useDispatch } from "react-redux";
 import NavBar from "../../controls/navBar";
 import { Link as RouterLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 function useQuery() {
   return new URLSearchParams(useLocation().search); // search for get all query from url
 }
@@ -16,6 +18,11 @@ function VerifyMail() {
   useEffect(() => {
     dispatch(verifyMail(id, setMessage));
   }, []);
+  useEffect(() => {
+    message ?
+            document.getElementById("preloader").classList.add("hidden") :
+            document.getElementById("preloader").classList.remove("hidden") ;
+  }, [message]);
   return (
     <>
       <NavBar />
@@ -24,14 +31,14 @@ function VerifyMail() {
           <div className=" flex flex-col place-items-center">
             <img
               className="w-20"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Google_account_icon.svg/188px-Google_account_icon.svg.png"
+              src="images/gigsource_verify.png"
             ></img>
             <h5 className="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
               Account Activation
             </h5>
           </div>
           <p className="justify-center mb-3 font-normal text-gray-500 dark:text-gray-400">
-            {message} Login to your GigSource account
+            { message &&   (message  + "Login to your GigSource account") }
           </p>
           <div className="flex place-content-end">
             <RouterLink

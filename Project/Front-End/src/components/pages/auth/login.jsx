@@ -34,6 +34,12 @@ const Login = () => {
   );
 
   useEffect(() => {
+      if (dataFromRegister?.verifiedEmail){
+        navigate("/");
+      }
+  }, [dataFromRegister]);
+
+  useEffect(() => {
     !loadingPage ?
             document.getElementById("preloader").classList.add("hidden") :
             document.getElementById("preloader").classList.remove("hidden") ;
