@@ -10,7 +10,7 @@ const AuthLayout = ({ title = "", children }) => {
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         position: "relative"
-    }
+    };
     return (
         <PageAnimation>
             <div className="dark:text-white flex text-gray-800 p-4 md:py-6 md:px-4 lg:p-0 ">
