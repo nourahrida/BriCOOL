@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { PrimaryButton, SecondaryButton } from "../../controls/buttons";
 import { Checkbox, Input } from "../../controls/field";
 import { Link, Loader } from "../../utils/utils";
-import AuthLayout from "../../layouts/authLayout";
+import AuthLayout from "../../layouts/authLayout.jsx";
 import decode from "jwt-decode";
 import { login, verifyMailResend } from "../../../actions/auth";
 import { useDispatch } from "react-redux";

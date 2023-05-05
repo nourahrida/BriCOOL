@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { PageAnimation } from "./../utils/utils";
+import { PageAnimation } from "../utils/utils";
 
 const AuthLayout = ({ title = "", children }) => {
     const style = {
