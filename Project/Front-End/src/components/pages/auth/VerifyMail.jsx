@@ -7,6 +7,7 @@ import Footer from "../../controls/footer";
 import { LoaderPage } from "../../utils/utils";
 import { Link as RouterLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { LazyLoginPage } from "../../utils/pagesLinks";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search); // search for get all query from url
@@ -18,7 +19,7 @@ function VerifyMail() {
   const [message, setMessage] = useState("");
   const Query = useQuery();
   const id = Query.get("id");
-  console.log(id);
+  
   useEffect(() => {
     if (!id) {
       navigate("/Page404");
@@ -50,7 +51,7 @@ function VerifyMail() {
             </p>
             <div className="flex place-content-end">
               <RouterLink
-                to="/login"
+                to={LazyLoginPage}
                 className="inline-flex items-center text-blue-600 mt-3 hover:underline place-items-end"
               >
                 Go to login

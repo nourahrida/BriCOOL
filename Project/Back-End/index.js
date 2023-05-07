@@ -18,6 +18,6 @@ app.use("/user",userRoute);
 
 const PORT = process.env.PORT || 5000;
 
-mongoose.connect(process.env.CONNECTION_URL) //no worning in console
+mongoose.connect(process.env.CONNECTION_URL) 
 .then(() => app.listen(PORT, () => console.log(`Server Running on port : ${PORT} `)))
 .catch((err) => console.error(err.message + "err"));

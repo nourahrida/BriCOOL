@@ -64,7 +64,7 @@ const templateVerifyMail = ({ customerName, verificationLink, logoName }) => {
           <body>
             <div class="container">
               <div class="logo">
-                <img src="${logoName}" alt="GigSource logo" preserveAspectRatio="none" width="200" height="90" >
+                <img src="${logoName}" alt="${process.env.APP_NAME} logo" preserveAspectRatio="none" width="200" height="90" >
               </div>
               <h1>Verify Your Account</h1>
               <p>Dear <b>${customerName}</b>,</p>
@@ -72,7 +72,7 @@ const templateVerifyMail = ({ customerName, verificationLink, logoName }) => {
               <p>To complete your registration, please click on the verification button below:</p>
               <a href="${verificationLink}" class="button">Verify Your Account</a>
               <p>If you did not create an account with us, please ignore this email.</p>
-              <p>If you have any questions or concerns, please do not hesitate to contact us by replying to this email or by sending an email to GigSource@gmail.com.</p>
+              <p>If you have any questions or concerns, please do not hesitate to contact us by replying to this email or by sending an email to ${process.env.APP_EMAIL}.</p>
               <p>Thank you for choosing ${process.env.APP_NAME} !</p>
             </div>
             <div class="footer">

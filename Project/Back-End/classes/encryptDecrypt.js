@@ -1,5 +1,4 @@
 import CryptoJS from 'crypto-js';
-import config from '../config/config.js';
 
 function findAndReplace(inputString, mergedJSON) {
    const parsedJSON = mergedJSON;

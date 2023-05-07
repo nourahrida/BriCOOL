@@ -24,7 +24,7 @@ export const signUp = (formData, navigate, setLoading) => async (dispatch) => {
         setLoading(false);
         console.log(err);
     }
-}
+};
 
 export const login = (formData, navigate, setLoading, setInvalid) => async (dispatch) => {
     try {
@@ -70,7 +70,7 @@ export const verifyMailResend = ({ id, email }, setLoadingPage) => async (dispat
     }
 };
 
-export const verifyMail = async (id, setMessage) => {
+export const verifyMail = (id, setMessage) => async (dispatch) => {
     try {
         const { data } = await API.verifyMail({ id: id });
 
@@ -134,4 +134,4 @@ export const loginWithGoogle = (formData, loadingG, navigate) => async (dispatch
         loadingG(false);
         console.log(err);
     }
-}
+};

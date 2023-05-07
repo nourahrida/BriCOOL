@@ -101,11 +101,11 @@ export const verifyMail = async (req, res) => {
 
         const existingUser = await User.findOne(condition);
 
-        if (existingUser) return res.status(202).json({ message: "Your gmail account already activated. Login to your GigSource account" });
+        if (existingUser) return res.status(202).json({ message: `Your gmail account already activated. Login to your ${process.env.APP_NAME} account` });
 
         await User.findByIdAndUpdate(id, { verifiedEmail: true });
 
-        res.status(200).json({ message: "Your gmail account has been successfully activated. Login to your GigSource account" });
+        res.status(200).json({ message: `Your gmail account has been successfully activated. Login to your ${process.env.APP_NAME} account` });
 
     } catch (error) {
         res.status(202).json({ message: "Error server, please try again." });
