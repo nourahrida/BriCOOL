@@ -20,7 +20,7 @@ function findAndReplace(inputString, mergedJSON) {
    return result;
 };
 
-var baseCrybt2 = {
+const baseCrybt2 = {
    a: 'n',
    b: 'z',
    c: 'y',
@@ -47,8 +47,8 @@ var baseCrybt2 = {
    x: 't',
    y: 'c',
    z: 'g'
- };
-var baseDecrybt2 = {
+};
+const baseDecrybt2 = {
    n: "a",
    z: "b",
    y: "c",
@@ -75,20 +75,20 @@ var baseDecrybt2 = {
    t: "x",
    c: "y",
    g: "z"
- };
+};
 export const decrypt = (decryptedText) => {
-   decryptedText =  findAndReplace(decryptedText,baseDecrybt2);
+   decryptedText = findAndReplace(decryptedText, baseDecrybt2);
 
    const dataSplit = decryptedText.split(process.env.separatorCryptage);
- console.log(dataSplit);
+
    const decryptedMessage = dataSplit[0];
- 
+
    const secretKey = dataSplit[1];
 
    const bytes = CryptoJS.AES.decrypt(decryptedMessage, secretKey);
 
-   //const decryptedData =JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-   const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
+   const decryptedData =JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+   //const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
 
    return decryptedData;
 };
@@ -99,9 +99,9 @@ export const encrypt = (encryptedText) => {
    const encryptedData = CryptoJS.AES.encrypt(JSON.stringify(encryptedText), secretKey).toString();
 
    let textcrypt = `${encryptedData}${process.env.separatorCryptage}${secretKey}`;
-   
-   textcrypt = findAndReplace(textcrypt,baseCrybt2);
-   
+
+   textcrypt = findAndReplace(textcrypt, baseCrybt2);
+
    return textcrypt;
 };
 

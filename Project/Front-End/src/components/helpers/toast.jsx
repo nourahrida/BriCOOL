@@ -28,10 +28,10 @@ export const toast = (type, message) => {
     })();
 };
 
-export const confirmAlert = (executing, confirmButtonText = "Yes, delete!") => {
+export const confirmAlert = (executing, confirmButtonText = "Yes, delete!",title) => {
     window.Swal.fire({
-        title: "Are you sure?",
-        text: "You can't go back !",
+        title: title,
+        text: "You can't go back !",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#ef4444",
@@ -67,7 +67,7 @@ export const scrollTop = () => {
 };
 
 export const formatToCurrency = value => {
-    return new Intl.NumberFormat("de-DE", { style: "currency", currency: "XOF" }).format(
+    return new Intl.NumberFormat("de-DE", { style: "currency", currency: "MAD" }).format(
         parseFloat(value)
     );
 };

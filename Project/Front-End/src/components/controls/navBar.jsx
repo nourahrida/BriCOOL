@@ -1,5 +1,5 @@
 import { Link as  RouterLink } from "react-router-dom";
-import { SwetcherDarkLightMode } from "../utils/utils";
+import { LoaderPage, SwetcherDarkLightMode } from "../utils/utils";
 import decode from "jwt-decode";
 
 export default function NavBar()  {

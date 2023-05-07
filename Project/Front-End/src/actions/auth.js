@@ -1,7 +1,8 @@
 import * as API from "../apis/auth.api";
-import { MESSAGE, AUTH } from "../constants/authType";
+import { AUTH } from "../constants/authType";
 import { toast } from "../components/helpers/toast";
 import { encrypt } from "../encryptDecrypt";
+import { homePage, loginPage } from "../components/utils/pagesLinks";
 
 export const signUp = (formData, navigate, setLoading) => async (dispatch) => {
     try {
@@ -16,7 +17,7 @@ export const signUp = (formData, navigate, setLoading) => async (dispatch) => {
             await dispatch({ type: AUTH, data });
             toast("success", "Successful registration");
             setLoading(false);
-            navigate("/login");
+            navigate(loginPage);
         }
 
     } catch (err) {
@@ -45,7 +46,7 @@ export const login = (formData, navigate, setLoading, setInvalid) => async (disp
             await dispatch({ type: AUTH, data });
             toast("success", "Successful connection");
             setLoading(false);
-            navigate("/");
+            navigate(homePage);
         }
 
     } catch (err) {
@@ -58,16 +59,18 @@ export const verifyMailResend = ({ id, email }, setLoadingPage) => async (dispat
     try {
         const { status, data } = await API.verifyMailResend({ id, email });
 
-        status === 200 ? toast("success", data.message) : toast("error", data.message)
+        status === 200 ?
+            toast("success", data.message) :
+            toast("error", data.message)
 
         setLoadingPage(false);
     } catch (err) {
         setLoadingPage(false);
         console.log(err);
     }
-}
+};
 
-export const verifyMail = (id, setMessage) => async () => {
+export const verifyMail = async (id, setMessage) => {
     try {
         const { data } = await API.verifyMail({ id: id });
 
@@ -76,13 +79,59 @@ export const verifyMail = (id, setMessage) => async () => {
     } catch (err) {
         console.log(err);
     }
-}
+};
 
-export const ForgotPassword = () => async (dispatch) => {
+export const forgotPassword = ({ email, setLoading }) => async (dispatch) => {
     try {
-       
+        const { data, status } = await API.forgotPassword(email);
+
+        setLoading(false);
+
+        status === 200 ?
+            toast("success", data.message) :
+            toast("error", data.message)
+
 
     } catch (err) {
+        setLoading(false);
+        console.log(err);
+    }
+};
+
+export const resetPassword = ({ id, password, setLoading, navigate }) => async (dispatch) => {
+    try {
+        const { data, status } = await API.resetPassword(id, password);
+
+        setLoading(false);
+
+        if (status === 200) {
+            toast("success", data.message);
+            navigate(loginPage)
+        } else toast("error", data.message)
+
+    } catch (err) {
+        setLoading(false);
+        console.log(err);
+    }
+};
+
+export const loginWithGoogle = (formData, loadingG, navigate) => async (dispatch) => {
+    try {
+        const { data } = await API.loginWithGoogle(formData);
+
+        if (data?.message) {
+            toast("error", data.message);
+            loadingG(false);
+        } else {
+            await dispatch({ type: AUTH, data })
+            toast("success", "Successful connection");
+            loadingG(false);
+            navigate(homePage);
+        }
+
+
+    } catch (err) {
+        loadingG(false);
         console.log(err);
     }
 }

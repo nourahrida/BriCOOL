@@ -1,6 +1,6 @@
 import User from "../modules/users.js";
 // import bcrypt from "bcryptjs";
-import { encrypt, IsMatch } from "../classes/encryptDecrypt.js";
+import { decrypt, encrypt, IsMatch } from "../classes/encryptDecrypt.js";
 import jwt from "jsonwebtoken";
 import { sendMail } from "../classes/mail.js";
 import mailOption from "../classes/mailOption.js";
@@ -40,7 +40,7 @@ export const signUp = async (req, res) => {
 
         const verificationLink = process.env.URL_WEB_SITE + "/verifyMail?id=" + user._id;
 
-        await sendMail(mailOption(email, email.split("@")[0], verificationLink));
+        await sendMail(mailOption(email, email.split("@")[0], verificationLink, `Confirm your account on ${process.env.APP_NAME}`, "templateVerifyMail"));
 
         res.status(200).json({ token: token });
 
@@ -88,9 +88,9 @@ export const signIn = async (req, res) => {
 export const verifyMail = async (req, res) => {
     try {
         const { id } = req.body;
-        
+
         if (!mongoose.Types.ObjectId.isValid(id)) return res.status(202).json({ message: "This user is not found !" });
-        
+
         const condition = {
             $and: [
                 { $exists: { fromGoogle: false } },
@@ -101,11 +101,11 @@ export const verifyMail = async (req, res) => {
 
         const existingUser = await User.findOne(condition);
 
-        if (existingUser) return res.status(202).json({ message: "Your gmail account already activated." });
+        if (existingUser) return res.status(202).json({ message: "Your gmail account already activated. Login to your GigSource account" });
 
         await User.findByIdAndUpdate(id, { verifiedEmail: true });
 
-        res.status(200).json({ message: "Your gmail account has been successfully activated." });
+        res.status(200).json({ message: "Your gmail account has been successfully activated. Login to your GigSource account" });
 
     } catch (error) {
         res.status(202).json({ message: "Error server, please try again." });
@@ -122,7 +122,7 @@ export const verifyMailResend = async (req, res) => {
 
         const verificationLink = process.env.URL_WEB_SITE + "/verifyMail?id=" + id;
 
-        await sendMail(mailOption(email, email.split("@")[0], verificationLink));
+        await sendMail(mailOption(email, email.split("@")[0], verificationLink, `Confirm your account on ${process.env.APP_NAME}`, "templateVerifyMail"));
 
         res.status(200).json({ message: "Email sent successfully." });
 
@@ -132,12 +132,127 @@ export const verifyMailResend = async (req, res) => {
     }
 };
 
-export const ForgotPassword = async (req,res) => {
+export const forgotPassword = async (req, res) => {
     try {
-       const { email } = req.body;
+        const { email } = req.body;
+
+        const condition = {
+            $and: [
+                { $exists: { fromGoogle: false } },
+                { email: email }
+            ]
+        };
+
+        const options = { email: 1, lastName: 1, firstName: 1 };
+
+        const existingUser = await User.findOne(condition, options);
+
+        if (!existingUser) return res.status(202).json({ message: "email adresse doesn't exist." });
+
+        const token = jwt.sign({
+            id: encrypt(existingUser._id)
+        }, "tokenResetPassword", { expiresIn: "1h" });
+
+        const verificationLink = process.env.URL_WEB_SITE + "/resetPassword?token=" + token;
+
+        await sendMail(mailOption(existingUser.email, (existingUser?.lastName && existingUser?.firstName ? `${existingUser?.lastName} ${existingUser?.firstName}` : email.split("@")[0]), verificationLink, `Reset your password on ${process.env.APP_NAME}`, "templateVerifyMail"));
+
+        res.status(200).json({ message: "Email sent successfully." });
 
     } catch (err) {
         res.status(202).json({ message: "Error server, please try again." });
+        console.log(err);
+    }
+};
+
+export const resetPassword = async (req, res) => {
+    try {
+        const { id, newPassword } = req.body;
+
+        if (!id) return res.status(202).json({ message: "This link is not valide. Please tyr again." });
+
+        if (!newPassword) return res.status(202).json({ message: "The password is empty!" });
+
+        const decryptId = decrypt(id);
+
+        // const existingUser = await User.findOne({_id : decryptId});
+
+        // if (!existingUser) return res.status(202).json({ message: "This user is not found !" });
+
+        if (!mongoose.mongoose.Types.ObjectId.isValid(decryptId)) return res.status(202).json({ message: "This user is not found !" });
+
+        await User.updateOne({ _id: decryptId }, { password: encrypt(newPassword) });
+
+        res.status(200).json({ message: "The password changed successfully." });
+
+    } catch (err) {
+        res.status(202).json({ message: "Error server, please try again." });
+        console.log(err);
+    }
+};
+
+export const loginWithGoogle = async (req, res) => {
+    try {
+        const { email, familyName, givenName, googleId, imageUrl } = req.body;
+
+        if (!email || !googleId) return res.status(202).json({ message: "Error server. please try again !" });
+
+        const condition = {
+            $and: [
+                { $exists: { fromGoogle: true } },
+                { email: email }
+            ]
+        };
+
+        const user = await User.findOne(condition);
+
+        let token = null;
+
+        if (user) {
+            // generate token for user
+            await User.findByIdAndUpdate(user._id, { lastConnectionDate: Date.now() });
+            token = jwt.sign(
+                {
+                    email: user.email,
+                    id: user._id,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    image: user.image,
+                    islogin: true,
+                    verifiedEmail: true,
+                }, "user", { expiresIn: "8h" });
+        } else {
+            // create user and genereate token 
+            const data = {
+                email: email,
+                firstName: givenName,
+                lastName: familyName,
+                googleId: googleId,
+                image: imageUrl,
+                verifiedEmail: true,
+
+            };
+
+            const user = new User(data);
+
+            await user.save();
+
+            token = jwt.sign(
+                {
+                    email: user.email,
+                    id: user._id,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    image: user.image,
+                    verifiedEmail: true,
+                    islogin: true
+                }, "user", { expiresIn: "8h" });
+        }
+
+        res.status(200).json({ token: token });
+
+    } catch (error) {
+        res.status(202).json({ message: "Error server, please try again." });
         console.log(error);
     }
-}
+};

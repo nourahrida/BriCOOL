@@ -10,14 +10,13 @@ const AuthLayout = ({ title = "", children }) => {
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         position: "relative"
-    };
+    }
     return (
         <PageAnimation>
             <div className="dark:text-white flex text-gray-800 p-4 md:py-6 md:px-4 lg:p-0 ">
                 <div className="flex flex-col-reverse lg:flex-row w-screen lg:min-h-screen border shadow-sm rounded-lg overflow-hidden lg:border-none lg:shadow-none lg:rounded-none lg:overflow-auto">
                     <div style={style}  className="flex flex-col justify-between text-white lg:min-h-screen w-full lg:w-7/12 xl:w-3/5">
                     <img className="w-8/12 h-auto" src="" alt="" />
-
                         <div>
                             <div className="space-y-8 p-5 font-Julee_cursive ">
                                 <Link to="/" reloadDocument style={{ width: "fit-content" }} className="flex items-center space-x-3">
@@ -35,7 +34,6 @@ const AuthLayout = ({ title = "", children }) => {
                                         </div>
                                     </div>
                                 </Link>
-
                                 <div className="dark:text-white space-y-4 text-1xl font-Julee_cursive">
                                     <h1 className="text-2xl lg:text-4xl">{title}</h1>
 

@@ -1,6 +1,11 @@
-import Login from './login';
-import Register from './register';
-import ForgotPassword from './forgotPassword';
+import Login from "./login";
+import {
+    LazyForgotPassword,
+    LazyLoginPage,
+    LazyRegisterPage,
+    LazyResetPassword,
+    LazyVerifyMail,
+} from "../../utils/pagesLinks";
 
 // import {
 //     Button,
@@ -10,24 +15,28 @@ import ForgotPassword from './forgotPassword';
 //     DialogFooter,
 //   } from "@material-tailwind/react";
 
-function Auth ({ formName }) {
+function Auth({ formName }) {
     switch (formName) {
-        case 'login':
-            return <Login />
-        case 'register':
-            return <Register />
-        case 'forgot-password':
-            return <ForgotPassword />
-        default :
-            return <Login />
+        case "login":
+            return <LazyLoginPage />;
+        case "register":
+            return <LazyRegisterPage />;
+        case "forgot-password":
+            return <LazyForgotPassword />;
+        case "VerifyMail":
+            return <LazyVerifyMail />;
+        case "resetPassword":
+            return <LazyResetPassword />;
+        default:
+            return <Login />;
     }
-};
+}
 
 // function Example() {
 //     const [open, setOpen] = react.useState(false);
-   
+
 //     const handleOpen = () => setOpen(!open);
-   
+
 //     return (
 //       <react.Fragment>
 //         <Button onClick={handleOpen} variant="gradient">
@@ -65,6 +74,5 @@ function Auth ({ formName }) {
 //       </react.Fragment>
 //     );
 //   }
-
 
 export default Auth;
