@@ -28,7 +28,7 @@ function VerifyMail() {
     // message
     //   ? document.getElementById("preloader").classList.add("hidden")
     //   : document.getElementById("preloader").classList.remove("hidden");
-  }, [id]);
+  }, [id, navigate]);
 
   id && dispatch(verifyMail(id, setMessage));
 

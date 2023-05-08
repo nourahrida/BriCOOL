@@ -1,7 +1,16 @@
 import { PageAnimation } from "../../utils/utils";
 import HomeLayout from "../../layouts/homeLayout";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 const Home = () => { 
+const location = useLocation();
+
+
+useEffect(() => {
+  console.log(location);
+}, [location]);
+
 const links = [
   { name: 'Open roles', href: '#' },
   { name: 'Internship program', href: '#' },
