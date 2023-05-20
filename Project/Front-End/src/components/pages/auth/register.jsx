@@ -13,7 +13,7 @@ import { GoogleLogin } from "react-google-login";
 import decode from "jwt-decode";
 import config from "../../../configs/config";
 import { gapi } from 'gapi-script';
-import { LazyLoginPage } from "../../utils/pagesLinks";
+import { loginPage } from "../../utils/pagesLinks";
 
 function Register() {
   useEffect(() => {
@@ -264,7 +264,7 @@ function Register() {
           </div>
 
           <p className="text-sm text-center">
-            Already have an account? <Link href={LazyLoginPage}>Login</Link>
+            Already have an account? <Link href={loginPage}>Login</Link>
           </p>
         </form>
       </AuthLayout>

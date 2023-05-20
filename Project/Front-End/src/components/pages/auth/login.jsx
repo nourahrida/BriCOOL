@@ -14,7 +14,7 @@ import { toast } from "../../helpers/toast";
 import { GoogleLogin } from "react-google-login";
 import { gapi } from 'gapi-script';
 import config from "../../../configs/config";
-import { LazyHomePage, LazyRegisterPage } from "../../utils/pagesLinks";
+import { LazyHomePage, registerPage } from "../../utils/pagesLinks";
 
 const Login = () => {
   useEffect(() => {
@@ -253,7 +253,7 @@ const Login = () => {
           </div>
 
           <p className="text-sm text-center">
-            Don't have an account? <Link href={LazyRegisterPage}>Register</Link>
+            Don't have an account? <Link href={registerPage}>Register</Link>
           </p>
         </form>
       </AuthLayout>

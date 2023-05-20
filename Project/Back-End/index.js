@@ -8,8 +8,9 @@ import bodyParser from "body-parser";
 const app = express();
 dotenv.config();
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: [process.env.URL_WEB_SITE],
     credentials: true,
+    // methods: ["GET", "POST", "PUT", "DELETE"],
   }));
 app.use(bodyParser.json({limit: "30mb", extended: true}));
 app.use(bodyParser.urlencoded({limit: "30mb", extended: true}));
