@@ -1,12 +1,15 @@
 import NavBar from "../controls/navBar";
 import Footer from "../controls/footer";
+import React ,{lazy , Suspense} from "react";
 
-export default function HomeLayout({children}) {
+const LazyNavBar = lazy(() => import("../controls/navBar"));
+const HomeLayout = ({children,socket}) => {
     return (
-        <>
-            <NavBar />
+        <Suspense fallback={null}>
+            <LazyNavBar socket={socket} />
             {children}
             <Footer />
-        </>
+        </Suspense>
     );
-}
+};
+export default HomeLayout;

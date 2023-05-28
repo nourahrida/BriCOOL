@@ -44,7 +44,7 @@ const userSchema = mongoose.Schema({
     fromGoogle: { type: Boolean, require: false },
     googleId: { type: String, require: false },
     image: { type: String, require: false },
-    phoneNumber: { type: Number, require: true ,unique: true},
+    phoneNumber: { type: Number, require: true},
     cin: { type: String, require: false},
     job: { type: String, require: false },
     adresse: { type: String, require: false }, 
